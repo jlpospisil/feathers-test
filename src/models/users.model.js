@@ -6,7 +6,7 @@ const DataTypes = Sequelize.DataTypes;
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const users = sequelizeClient.define('users', {
-  
+
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -24,12 +24,10 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    deletedAt: {
-      type: DataTypes.DATE,
-      allowNull: true
-    }
   
   }, {
+    // Enable soft deletes
+    paranoid: true,
     hooks: {
       beforeCount(options) {
         options.raw = true;

@@ -24,6 +24,11 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }
   
   }, {
     // Enable soft deletes
@@ -38,7 +43,7 @@ module.exports = function (app) {
   // eslint-disable-next-line no-unused-vars
   model.associate = function (models) {
     const { account } = models;
-    model.belongsToMany(account, { through: 'userAccount' });
+    model.belongsToMany(account, { through: 'userAccount', as: 'accounts' });
   };
 
   return model;

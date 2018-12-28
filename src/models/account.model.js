@@ -33,7 +33,7 @@ module.exports = function (app) {
   // eslint-disable-next-line no-unused-vars
   model.associate = function (models) {
     const { user } = models;
-    model.belongsToMany(user, { through: 'userAccount' });
+    model.belongsToMany(user, { through: 'userAccount', as: 'users' });
   };
 
   return model;

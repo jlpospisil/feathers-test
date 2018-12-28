@@ -1,5 +1,5 @@
 const createService = require('feathers-sequelize');
-const createModel = require('../../models/account.model');
+const createModel = require('../../../models/account.model');
 const hooks = require('./accounts.hooks');
 
 module.exports = function (app) {
@@ -12,10 +12,10 @@ module.exports = function (app) {
   };
 
   // Initialize our service with any options it requires
-  app.use('/accounts', createService(options));
+  app.use('/admin/accounts', createService(options));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service('accounts');
+  const service = app.service('/admin/accounts');
 
   service.hooks(hooks);
 };

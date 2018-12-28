@@ -23,17 +23,9 @@ class Service {
 
     const userAccountIds = userAccounts.map(account => account.accountId);
 
-    return userAccountIds;
-
-    // const data = accountModel.findAll({
-    //   where: {
-    //     id: { $in: userAccountIds }
-    //   }
-    // });
-    //
-    // return {
-    //   data
-    // };
+    return accountModel.findAll({
+      id: userAccountIds
+    });
   }
 
   async get (id, params) {

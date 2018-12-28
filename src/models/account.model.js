@@ -5,25 +5,20 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const users = sequelizeClient.define('users', {
+  const model = sequelizeClient.define('account', {
 
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    password: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    firstName: {
+    startingBalance: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    lastName: {
+    currentBalance: {
       type: DataTypes.STRING,
       allowNull: false
-    },
+    }
   
   }, {
     // Enable soft deletes
@@ -36,10 +31,10 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  users.associate = function (models) {
-    // Define associations here
-    // See http://docs.sequelizejs.com/en/latest/docs/associations/
+  model.associate = function (models) {
+    const { user } = models;
+    model.belongsToMany(user, { through: 'userAccount' });
   };
 
-  return users;
+  return model;
 };

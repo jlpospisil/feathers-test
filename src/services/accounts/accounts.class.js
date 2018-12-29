@@ -21,10 +21,12 @@ class Service {
       }
     });
 
-    const userAccountIds = userAccounts.map(account => account.accountId);
+    const userAccountIds = await userAccounts.map(account => account.accountId);
 
     return accountModel.findAll({
-      id: userAccountIds
+      where: {
+        id: userAccountIds
+      }
     });
   }
 
